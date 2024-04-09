@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Hangman game</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1 class="title">Jogo da forca</h1>
+  <div class="container-word">
+    <p class="container-title">Adivinhe a palavra:</p>
+    <p class="word" id="word"></p>
+  </div>
+  <div class="container-stats">
+    <p>Letras escolhidas: <span id="all-letters"></span></p>
+    <p>Letras erradas: <span id="wrong-letters"></span></p>
+    <input id="word-input" type="text" placeholder="Digite uma letra">
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
