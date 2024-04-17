@@ -1,12 +1,14 @@
 /*import all poppins weights*/
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-@import url(https://db.onlinewebfonts.com/c/14936bb7a4b6575fd2eee80a3ab52cc2?family=Feather+Bold);
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root {
   --color-border: #d9d9d9;
   --color-text: #232323;
   --color-background: #fff;
+  --color-correctKey: #6aaa64;
+  --color-wrongKey: #cb2431;
 }
 
 * {
@@ -27,7 +29,7 @@ body {
   margin-top: 30px;
   margin-bottom: 30px;
   font-size: 30px;
-  font-family: 'Feather Bold', sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 
 .container-word {
@@ -117,8 +119,85 @@ input:focus::placeholder {
   transition: 0.5s ease-in-out;
 }
 
+.keyboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.keyboard .key {
+  padding: 5px;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  border: solid 2px var(--color-border);
+  border-bottom: solid 4px var(--color-border);
+}
+
+.correctKey:hover {
+  background-color: #82cf7a;
+  border: solid 2px #6aaa64;
+  border-bottom: solid 4px var(--color-correctKey);
+  transition: 0.4s ease-in-out;
+  animation: 0.6s correctKeyAnimation;
+}
+
+.wrongKey:hover {
+  background-color: #e74c3c;
+  border: solid 2px #b33c2c;
+  border-bottom: solid 4px var(--color-wrongKey);
+  animation: 0.3s wrongKeyAnimation;
+}
+
 .win {
   box-shadow: 0px 0px 0px 3px #40e340;
   transition: 0.4s ease-in-out;
+}
+
+@keyframes correctKeyAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(5deg);
+  }
+
+  50% {
+    transform: rotate(0deg);
+  }
+
+  75% {
+    transform: rotate(-5deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes wrongKeyAnimation {
+  0% {
+    transform: translateX(0px);
+  }
+
+  25% {
+    transform: translateX(3px);
+  }
+
+  50% {
+    transform: translateX(0px);
+  }
+
+  75% {
+    transform: translateX(-3px);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
 }
 
