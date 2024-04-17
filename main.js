@@ -13,6 +13,7 @@ const wordsArray = [
 
 let word = wordsArray[Math.floor(Math.random() * wordsArray.length)].split("");
 const wordLength = word.length;
+let life = 6;
 let wordDisplay = [];
 let wrongLetters = [];
 let allLetters = [];
@@ -23,6 +24,7 @@ const letterKeys = [...document.querySelectorAll(".key")];
 const allLettersDisplay = document.getElementById("all-letters");
 const wrongLettersDisplay = document.getElementById("wrong-letters");
 const wordDisplayElement = document.getElementById("word");
+const lifeBars = [...document.querySelectorAll(".life-bar-inner")];
 
 //
 
@@ -46,6 +48,7 @@ const checkLetter = (letter) => {
     })
   } else {
     !wrongLetters.includes(letter) ? wrongLetters.push(letter) : null;
+    life--;
   }
   return;
 }
@@ -60,25 +63,49 @@ const winCheck = () => {
   if (win.includes(false)) {
     return false;
   }
+
   wordContainer.classList.add("win");
   resetGame();
   return true;
 }
 
 const resetGame = () => {
+  letterKeys.map((key) => {
+    key.disabled = true;
+  })
   setTimeout(() => {
     word = wordsArray[Math.floor(Math.random() * wordsArray.length)].split("");
   wordDisplay = [];
   wrongLetters = [];
   allLetters = [];
   win = [];
+  life = 6;
+  handleLifeBar()
   wordContainer.classList.remove("win");
+wordContainer.classList.remove("lose");
   word.map((letter, index) => {
     win.push(false);
     wordDisplay.push("<span class='letter'>_</span>");
     updateWord();
   })
+  letterKeys.forEach((key) => {
+    key.disabled = false;
+  })
   }, 2000)
+}
+
+const handleLifeBar = () => {
+  lifeBars.forEach((el) => {
+    el.classList.remove("life-bar-active")
+  })
+  for(let i = 0; i < life; i++) {
+    lifeBars[i].classList.add("life-bar-active")
+  }
+
+  if(life <= 0){
+    wordContainer.classList.add("lose");
+    resetGame();
+  }
 }
 
 const keyBoardEvents = (evt) => {
@@ -87,6 +114,7 @@ const keyBoardEvents = (evt) => {
     key.addEventListener("click", (evt) => {
 
       if(word.includes(evt.target.innerText.toLowerCase())){
+        evt.target.disabled = true;
         evt.target.classList.add("correctKey");
         setTimeout( () => {
           evt.target.classList.remove("correctKey");
@@ -97,14 +125,15 @@ const keyBoardEvents = (evt) => {
           evt.target.classList.remove("wrongKey");
         }, 1000);
       }
-        
       checkLetter(key.innerHTML);
       updateWord();
+      handleLifeBar();
       winCheck() ? resetGame() : null;
     })
   })
 }
 
+handleLifeBar();
 keyBoardEvents();
 
 
