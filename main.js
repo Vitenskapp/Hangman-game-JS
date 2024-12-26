@@ -9,6 +9,8 @@ const wordsArray = [
   "abacate",
   "pera",
   "manga",
+  "nazismo",
+  "otorrinolaringologista"
 ];
 
 let word = wordsArray[Math.floor(Math.random() * wordsArray.length)].split("");
